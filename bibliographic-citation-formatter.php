@@ -49,7 +49,7 @@ function bcf_render_citation() {
             <label for="bcf-format">Citation format:</label>
             <select id="bcf-format">
                 <option value="apa">APA</option>
-                <option value="chicago">Chicago</option>
+                <option value="chicago" selected>Chicago</option>
                 <option value="mla">MLA</option>
             </select>
             <!-- Copy Button -->
