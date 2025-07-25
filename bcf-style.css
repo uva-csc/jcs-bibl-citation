@@ -1,0 +1,14 @@
+.bcf-citation-box {
+
+}
+
+.bcf-citation-box .selector {
+    font-size: 1rem;
+}
+
+.bcf-output {
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin: 1em 0;
+    background: #f9f9f9;
+}
