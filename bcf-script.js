@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             doi: box.dataset.doi
         };
 
-        console.log('data obj', data)
+        // console.log('data obj', data)
 
         function formatCitation(format) {
             // const authors = [...data.authors].map((a) => splitName(a));

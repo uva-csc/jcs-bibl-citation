@@ -4,6 +4,7 @@
  * Description: Displays a citation using ACF fields with selectable formats (APA, Chicago, etc.)
  * Version: 1.0
  * Author: Than Grove
+ * Date: 2025-07-25
  */
 
 add_shortcode('citebibl', 'bcf_render_citation');
