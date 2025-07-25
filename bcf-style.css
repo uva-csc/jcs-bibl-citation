@@ -29,6 +29,11 @@
     margin: 0;
     padding: 0 0 0 0.5rem;
     font-weight: normal;
+    text-transform: none;
+}
+
+button.bcf-copy-btn svg {
+    vertical-align: text-bottom;
 }
 
 .bcf-copy-btn:hover {

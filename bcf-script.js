@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const citationText = output.textContent.replace(/\s+/g, ' ');
             if (citationText) {
                 navigator.clipboard.writeText(citationText).then(() => {
-                    copyBtn.textContent = '✅ Copied!';
+                    copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">\n' +
+                        '  <path fill="green" d="M9 16.2l-4.2-4.2 1.4-1.4 2.8 2.8 6.8-6.8 1.4 1.4z"/>\n' +
+                        '</svg> Copied!';
                     setTimeout(() => (copyBtn.textContent = 'Copy'), 1500);
                 });
             }
