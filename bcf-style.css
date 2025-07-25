@@ -3,12 +3,34 @@
 }
 
 .bcf-citation-box .selector {
-    font-size: 1rem;
+    font-size: 0.9rem;
+}
+
+#bcf-format {
+    font-size:0.8rem;
 }
 
 .bcf-output {
+    position: relative;
     border: 1px solid #ccc;
     padding: 1em;
     margin: 1em 0;
     background: #f9f9f9;
+}
+
+.bcf-copy-btn {
+    display: inline-block;
+    width: fit-content;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: #192f40;
+    margin: 0;
+    padding: 0 0 0 0.5rem;
+    font-weight: normal;
+}
+
+.bcf-copy-btn:hover {
+    font-weight: bold;
 }
