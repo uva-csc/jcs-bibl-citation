@@ -20,14 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
         function formatCitation(format) {
             // const authors = [...data.authors].map((a) => splitName(a));
             const jtitle = '<em>Journal of Contemplative Studies</em>';
+            const atitle = `“${data.title}.”`;
             const auths = formatAuthors(data.authors, format);
             switch (format) {
                 case 'apa':
-                    return `${auths} (${data.year}). ${data.title}. ${jtitle}, ${data.issue}, ${data.pages}. ${data.doi}.`;
+                    return `${auths} (${data.year}). ${atitle} ${jtitle}, ${data.issue}, ${data.pages}. ${data.doi}.`;
                 case 'chicago':
-                    return `${auths}. "${data.title}." ${jtitle} ${data.issue} (${data.year}): ${data.pages}. ${data.doi}.`;
+                    return `${auths}. ${atitle} ${jtitle} ${data.issue} (${data.year}): ${data.pages}. ${data.doi}.`;
                 case 'mla':
-                    return `${auths}. "${data.title}." ${jtitle}, vol. ${data.issue}, ${data.year}, ${data.pages}. ${data.doi}.`;
+                    return `${auths}. ${atitle} ${jtitle}, vol. ${data.issue}, ${data.year}, ${data.pages}. ${data.doi}.`;
                 default:
                     return 'No style selected';
             }
