@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         function formatCitation(format) {
             // const authors = [...data.authors].map((a) => splitName(a));
             const jtitle = '<em>Journal of Contemplative Studies</em>';
-            const atitle = `“${data.title}.”`;
-            const atitle_plain = `${data.title}.`;
+            const atitle = `“${data.title.trim()}.”`;
+            const atitle_plain = `${data.title.trim()}. `;
             const auths = formatAuthors(data.authors, format);
             switch (format) {
                 case 'apa':
