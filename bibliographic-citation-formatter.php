@@ -36,7 +36,13 @@ function bcf_render_citation() {
     $pubdate = new DateTime($date_info['date_published']);
     $year = $pubdate->format("Y");
     $pages = get_field('page_range');
-    $pgrange = $pages['start_page'] . '-' . $pages['end_page'];
+    $pgrange = 'none';
+    if (!empty($pages['start_page'])) {
+        $pgrange = $pages['start_page'];
+    }
+    if (!empty($pages['end_page'])) {
+        $pgrange .= '-' . $pages['end_page'];
+    }
     $doi = get_field('doi');
 
     ob_start();

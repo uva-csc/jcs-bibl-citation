@@ -23,27 +23,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const atitle = `“${data.title.trim()}.”`;
             const atitle_plain = `${data.title.trim()}. `;
             const auths = formatAuthors(data.authors, format);
+            let citation = '';
             switch (format) {
                 case 'apa':
-                    if (data.issue === 'none') {
-                        return `${auths} (${data.year}). ${atitle_plain} ${jtitle}, ${data.pages}. ${data.doi}.`;
-                    } else {
-                        return `${auths} (${data.year}). ${atitle_plain} ${jtitle}, ${data.issue}, ${data.pages}. ${data.doi}.`;
+                    citation = `${auths} (${data.year}). ${atitle_plain} ${jtitle}`;
+                    if (data.issue !== 'none') {
+                        citation += `, ${data.issue}`;
                     }
+                    if (data.pages !== 'none') {
+                        citation += `, ${data.pages}`;
+                    }
+                    citation += `. ${data.doi}.`;
+                    return citation;
+
                 case 'chicago':
-                    if (data.issue === 'none') {
-                        return `${auths}. ${atitle} ${jtitle} (${data.year}): ${data.pages}. ${data.doi}.`;
-                    } else {
-                        return `${auths}. ${atitle} ${jtitle} ${data.issue} (${data.year}): ${data.pages}. ${data.doi}.`;
+                    citation = `${auths}. ${atitle} ${jtitle} `;
+                    if (data.issue !== 'none') {
+                        citation += `${data.issue} `;
                     }
+                    citation += `(${data.year})`
+                    if (data.pages !== 'none') {
+                        citation += `: ${data.pages}`;
+                    }
+                    citation += `. ${data.doi}.`;
+                    return citation;
+
                 case 'mla':
-                    if (data.issue === 'none') {
-                        return `${auths}. ${atitle} ${jtitle}, ${data.year}, ${data.pages}. ${data.doi}.`;
-                    } else {
-                        return `${auths}. ${atitle} ${jtitle}, vol. ${data.issue}, ${data.year}, ${data.pages}. ${data.doi}.`;
+                    citation = `${auths}. ${atitle} ${jtitle}, `;
+                    if (data.issue !== 'none') {
+                        citation += `vol. ${data.issue}, `;
                     }
-                default:
-                    return 'No style selected';
+                    citation += `${data.year}`
+                    if (data.pages !== 'none') {
+                        citation += `, ${data.pages}`;
+                    }
+                    citation += `. ${data.doi}.`;
+                    return citation;
             }
         }
 
