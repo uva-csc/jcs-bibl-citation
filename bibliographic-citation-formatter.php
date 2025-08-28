@@ -39,9 +39,10 @@ function bcf_render_citation() {
     $pgrange = 'none';
     if (!empty($pages['start_page'])) {
         $pgrange = $pages['start_page'];
-    }
-    if (!empty($pages['end_page'])) {
-        $pgrange .= '-' . $pages['end_page'];
+
+        if (!empty($pages['end_page'])) {
+            $pgrange .= '-' . $pages['end_page'];
+        }
     }
     $doi = get_field('doi');
 
