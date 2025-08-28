@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = {
             title: box.dataset.title,
             authors: JSON.parse(box.dataset.author),
-            issue: box.dataset.issue * 1,
-            year: box.dataset.year.split(', ')[1],
+            issue: box.dataset.issue,
+            year: box.dataset.year,
             pages: box.dataset.pages,
             doi: box.dataset.doi
         };
@@ -21,18 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
             // const authors = [...data.authors].map((a) => splitName(a));
             const jtitle = '<em>Journal of Contemplative Studies</em>';
             const atitle = `“${data.title}.”`;
+            const atitle_plain = `${data.title}.`;
             const auths = formatAuthors(data.authors, format);
             switch (format) {
                 case 'apa':
-                    return `${auths} (${data.year}). ${atitle} ${jtitle}, ${data.issue}, ${data.pages}. ${data.doi}.`;
+                    if (data.issue === 'none') {
+                        return `${auths} (${data.year}). ${atitle_plain} ${jtitle}, ${data.pages}. ${data.doi}.`;
+                    } else {
+                        return `${auths} (${data.year}). ${atitle_plain} ${jtitle}, ${data.issue}, ${data.pages}. ${data.doi}.`;
+                    }
                 case 'chicago':
-                    return `${auths}. ${atitle} ${jtitle} ${data.issue} (${data.year}): ${data.pages}. ${data.doi}.`;
+                    if (data.issue === 'none') {
+                        return `${auths}. ${atitle} ${jtitle} (${data.year}): ${data.pages}. ${data.doi}.`;
+                    } else {
+                        return `${auths}. ${atitle} ${jtitle} ${data.issue} (${data.year}): ${data.pages}. ${data.doi}.`;
+                    }
                 case 'mla':
-                    return `${auths}. ${atitle} ${jtitle}, vol. ${data.issue}, ${data.year}, ${data.pages}. ${data.doi}.`;
+                    if (data.issue === 'none') {
+                        return `${auths}. ${atitle} ${jtitle}, ${data.year}, ${data.pages}. ${data.doi}.`;
+                    } else {
+                        return `${auths}. ${atitle} ${jtitle}, vol. ${data.issue}, ${data.year}, ${data.pages}. ${data.doi}.`;
+                    }
                 default:
                     return 'No style selected';
             }
         }
+
+        // console.log("It's new!");
 
         function updateCitation() {
             output.innerHTML = formatCitation(select.value);
@@ -55,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        select.addEventListener('change', updateCitation);
+        select.addEventListener('change', updateCitation );
         updateCitation(); // initialize
     });
 });
@@ -72,11 +87,8 @@ function formatAuthors(auths, style) {
                     lastpref = '& ';
                 }
                 return `${lastpref}${last_name}, ${first_name[0]}.`;
+
             case 'chicago':
-                if (auths.length > 1 && ind === auths.length - 1) {
-                    lastpref = 'and ';
-                }
-                return `${lastpref}${first_name} ${last_name}`;
             case 'mla':
                 if (auths.length > 1 && ind === auths.length - 1) {
                     lastpref = 'and ';

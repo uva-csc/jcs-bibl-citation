@@ -31,8 +31,10 @@ function bcf_render_citation() {
     }
     $authors =  json_encode(get_authors());
     $issue_id = get_field('special_issue');
-    $issue = get_field('issue_number', $issue_id);
-    $year = get_field('dates');
+    $issue = !empty($issue_id) ? get_field('issue_number', $issue_id) : 'none';
+    $date_info = get_field('dates');
+    $pubdate = new DateTime($date_info['date_published']);
+    $year = $pubdate->format("Y");
     $pages = get_field('page_range');
     $pgrange = $pages['start_page'] . '-' . $pages['end_page'];
     $doi = get_field('doi');
@@ -41,7 +43,7 @@ function bcf_render_citation() {
     ?>
     <div class="bcf-citation-box" data-title="<?= esc_attr($title) ?>"
          data-author="<?= esc_attr($authors) ?>" data-issue="<?= esc_attr($issue) ?>"
-         data-year="<?= esc_attr($year['date_published']) ?>" data-pages="<?= esc_attr($pgrange) ?>"
+         data-year="<?= esc_attr($year) ?>" data-pages="<?= esc_attr($pgrange) ?>"
          data-doi="<?= esc_attr($doi) ?>"
     >
         <h3>Cite As</h3>
@@ -69,7 +71,7 @@ function get_authors()
     $clean_authors = array();
 
     foreach ($authors as $author) {
-        if ($author->ID){
+        if ($author && isset($author->ID)){
             $auth = get_post_meta($author->ID);
             // Remove underscore properties for trimness
             $clean_auth = array_filter(
