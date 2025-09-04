@@ -29,6 +29,8 @@ function bcf_render_citation() {
     if (strlen($subtitle) > 0) {
         $title .= ': ' . $subtitle;
     }
+    $apatitle = get_field('apa_title');
+    $apaoption = (strlen($apatitle) > 0) ? '<option value="apa">APA</option>' : '';
     $authors =  json_encode(get_authors());
     $issue_id = get_field('special_issue');
     $issue = !empty($issue_id) ? get_field('issue_number', $issue_id) : 'none';
@@ -41,7 +43,7 @@ function bcf_render_citation() {
         $pgrange = $pages['start_page'];
 
         if (!empty($pages['end_page'])) {
-            $pgrange .= '-' . $pages['end_page'];
+            $pgrange .= '–' . $pages['end_page'];
         }
     }
     $doi = get_field('doi');
@@ -49,6 +51,7 @@ function bcf_render_citation() {
     ob_start();
     ?>
     <div class="bcf-citation-box" data-title="<?= esc_attr($title) ?>"
+         data-apatitle="<?= esc_attr($apatitle) ?>"
          data-author="<?= esc_attr($authors) ?>" data-issue="<?= esc_attr($issue) ?>"
          data-year="<?= esc_attr($year) ?>" data-pages="<?= esc_attr($pgrange) ?>"
          data-doi="<?= esc_attr($doi) ?>"
@@ -57,7 +60,7 @@ function bcf_render_citation() {
         <div class="selector">
             <label for="bcf-format">Citation format:</label>
             <select id="bcf-format">
-                <option value="apa">APA</option>
+                <?php echo $apaoption; ?>
                 <option value="chicago" selected>Chicago</option>
                 <option value="mla">MLA</option>
             </select>
@@ -73,7 +76,6 @@ function bcf_render_citation() {
 function get_authors()
 {
     $authors = get_field('article_authors');
-
 
     $clean_authors = array();
 
